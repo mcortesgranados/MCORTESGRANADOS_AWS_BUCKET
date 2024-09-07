@@ -3,171 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction to Big Data with Apache Spark (Java)</title>
+    <title>Introduction to Big Data with Apache Spark</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
         }
         h1, h2 {
-            color: #2d6187;
-        }
-        h1 {
-            text-align: center;
-            font-size: 2.8em;
-            margin-top: 20px;
-        }
-        h2 {
-            font-size: 1.7em;
-            margin-top: 40px;
-        }
-        p, ul, ol {
-            font-size: 1.15em;
-            line-height: 1.6;
-            color: #555;
-        }
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-        ol {
-            list-style-type: decimal;
-            margin-left: 20px;
+            color: #333;
         }
         code {
-            background-color: #e7e9eb;
-            padding: 3px 5px;
+            background: #f4f4f4;
+            padding: 2px 4px;
             border-radius: 4px;
-            color: #d81e5b;
-            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
         }
         pre {
-            background-color: #1c1c1c;
-            padding: 15px;
-            border-radius: 6px;
-            color: #d1d1d1;
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
             overflow-x: auto;
-            font-size: 1em;
-            margin-top: 15px;
-        }
-        pre code {
-            color: #f9ca24;
-        }
-        .highlight {
-            background-color: #ffcd7b;
-            padding: 2px 6px;
-            border-radius: 3px;
-            color: #2c3e50;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-        }
-        a {
-            color: #1e90ff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+    <h1>Introduction to Big Data with Apache Spark</h1>
 
-<div class="container">
-    <h1>Introduction to Big Data with Apache Spark (Java)</h1>
+    <p><strong>Apache Spark</strong> is an open-source, distributed computing system that provides a unified processing engine for large-scale data processing. It offers a fast and general-purpose cluster-computing framework for big data analytics. Spark can handle both batch and stream processing and supports various programming languages, including Java, Scala, Python, and R.</p>
 
-    <p><strong>Apache Spark</strong> is an open-source distributed computing system used for big data processing, and it's known for its fast performance due to in-memory computation. It provides APIs for various programming languages, including Java, and supports operations like batch processing, real-time data streaming, machine learning, and graph computation.</p>
-
-    <h2>Key Features of Apache Spark</h2>
+    <h2>Key Features of Apache Spark:</h2>
     <ul>
-        <li><span class="highlight">Distributed Processing:</span> Spark distributes data across a cluster, enabling parallel processing.</li>
-        <li><span class="highlight">In-Memory Computation:</span> Intermediate results are stored in memory, making operations faster.</li>
-        <li><span class="highlight">Fault Tolerance:</span> Spark automatically recovers from failures by tracking lineage information of the RDDs (Resilient Distributed Datasets).</li>
-        <li><span class="highlight">Support for Various Data Sources:</span> It can work with HDFS, Cassandra, HBase, S3, etc.</li>
-        <li><span class="highlight">APIs for Multiple Languages:</span> Java, Scala, Python, and R.</li>
+        <li><strong>Speed:</strong> In-memory computation allows Spark to process data much faster than traditional disk-based engines.</li>
+        <li><strong>Ease of Use:</strong> Provides high-level APIs in Java, Scala, Python, and R, and includes built-in libraries for SQL, streaming, machine learning, and graph processing.</li>
+        <li><strong>Flexibility:</strong> Can be deployed on various cluster managers, including Hadoop YARN, Apache Mesos, and Kubernetes.</li>
     </ul>
 
-    <h2>Spark Components</h2>
-    <ul>
-        <li><span class="highlight">Spark Core:</span> Handles basic I/O functionalities and scheduling tasks across a cluster.</li>
-        <li><span class="highlight">Spark SQL:</span> For structured data processing.</li>
-        <li><span class="highlight">Spark Streaming:</span> For processing real-time data streams.</li>
-        <li><span class="highlight">MLlib:</span> Machine learning library.</li>
-        <li><span class="highlight">GraphX:</span> For graph-based computations.</li>
-    </ul>
+    <h2>Example Code in Java:</h2>
+    <p>The following code snippet demonstrates a simple Spark application in Java that performs basic data operations:</p>
 
-    <h2>Example: Word Count Program in Apache Spark (Java)</h2>
-
-    <p>One of the simplest examples of big data processing is the <strong>word count</strong> problem. Let's create a Java program using Spark to count the occurrences of words in a text file.</p>
-
-    <h3>Maven Dependencies (pom.xml)</h3>
-    <p>To work with Spark in Java, add the following dependencies to your Maven <code>pom.xml</code>:</p>
-
-    <pre><code>&lt;dependencies&gt;
-    &lt;!-- Spark Core --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
-        &lt;artifactId&gt;spark-core_2.12&lt;/artifactId&gt;
-        &lt;version&gt;3.4.0&lt;/version&gt;
-    &lt;/dependency&gt;
-
-    &lt;!-- Spark SQL (Optional, for SQL queries) --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;
-        &lt;artifactId&gt;spark-sql_2.12&lt;/artifactId&gt;
-        &lt;version&gt;3.4.0&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-    </code></pre>
-
-    <h3>Code Example: Word Count in Java with Spark</h3>
-
-    <pre><code>import org.apache.spark.api.java.JavaRDD;
+    <pre><code class="language-java">
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaPairRDD;
-import scala.Tuple2;
 
-import java.util.Arrays;
-
-public class WordCount {
+public class SparkExample {
     public static void main(String[] args) {
-        // Initialize a Spark context
-        SparkConf conf = new SparkConf().setAppName("Word Count").setMaster("local");
+        // Create a SparkConf object and set the application name
+        SparkConf conf = new SparkConf().setAppName("Spark Example").setMaster("local");
+        
+        // Create a JavaSparkContext object with the SparkConf
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-        // Load the input text file into an RDD (Resilient Distributed Dataset)
-        JavaRDD&lt;String&gt; inputFile = sc.textFile("input.txt");
+        // Create an RDD (Resilient Distributed Dataset) from a list of integers
+        JavaRDD<Integer> numbers = sc.parallelize(java.util.Arrays.asList(1, 2, 3, 4, 5));
 
-        // Split each line into words and flatten into a single RDD
-        JavaRDD&lt;String&gt; words = inputFile.flatMap(line -&gt; Arrays.asList(line.split(" ")).iterator());
+        // Perform a transformation (map) and an action (reduce)
+        int sum = numbers.map(number -> number * 2) // Double each number
+                          .reduce((a, b) -> a + b); // Sum the numbers
 
-        // Map each word to a (word, 1) tuple
-        JavaPairRDD&lt;String, Integer&gt; wordPairs = words.mapToPair(word -&gt; new Tuple2&lt;&gt;(word, 1));
+        // Print the result
+        System.out.println("Sum of doubled numbers: " + sum);
 
-        // Reduce by key (word) and sum the occurrences
-        JavaPairRDD&lt;String, Integer&gt; wordCounts = wordPairs.reduceByKey((count1, count2) -&gt; count1 + count2);
-
-        // Save the result to a text file
-        wordCounts.saveAsTextFile("output");
-        
-        // Optionally, print the result to the console
-        wordCounts.collect().forEach(System.out::println);
-
-        // Stop the Spark context
-        sc.stop();
+        // Stop the SparkContext
+        sc.close();
     }
 }
     </code></pre>
 
-    <h2>Explanation</h2>
-    <ul>
-        <li><strong>Spark Configuration:</strong> <code>Spark
+    <p>This example creates a Spark application that initializes a Spark context, processes a dataset by doubling the numbers, and then calculates the sum of the doubled numbers.</p>
+</body>
+</html>
